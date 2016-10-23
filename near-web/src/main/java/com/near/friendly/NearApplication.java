@@ -4,7 +4,11 @@ import com.near.friendly.core.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
+import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
@@ -19,7 +23,8 @@ import java.util.Collection;
  * @author Amghar on 27/09/2016.
  */
 @ComponentScan
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
+@EnableConfigurationProperties({ApplicationProperties.class, LiquibaseProperties.class})
 public class NearApplication {
 
     private static final Logger log = LoggerFactory.getLogger(NearApplication.class);
@@ -46,7 +51,7 @@ public class NearApplication {
                         "Application '{}' is running! Access URLs:\n\t" +
                         "Local: \t\thttp://localhost:{}\n\t" +
                         "External: \thttp://{}:{}" +
-                "\n----------------------------------------------------------",
+                        "\n----------------------------------------------------------",
                 env.getProperty("spring.application.name"),
                 env.getProperty("server.port"),
                 InetAddress.getLocalHost().getHostAddress(),

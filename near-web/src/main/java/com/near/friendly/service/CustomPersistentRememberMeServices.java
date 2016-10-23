@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.CookieTheftException;
@@ -39,12 +38,12 @@ public class CustomPersistentRememberMeServices extends AbstractRememberMeServic
     private static final int TOKEN_VALIDITY_SECONDS = 60 * 60 * 24 * TOKEN_VALIDITY_DAYS;
 
 
-    @Inject
-    private UserService userService;
+    private final UserService userService;
 
-    @Inject()
-    public CustomPersistentRememberMeServices(UserDetailsService userDetailsService) {
-        super(Constants.SECRET_KEY, userDetailsService);
+    @Inject
+    public CustomPersistentRememberMeServices(final UserService userService) {
+        super(Constants.SECRET_KEY, userService);
+        this.userService = userService;
     }
 
     @Override
@@ -152,7 +151,6 @@ public class CustomPersistentRememberMeServices extends AbstractRememberMeServic
         }
         return userSession;
     }
-
 
 
     private void addCookie(UserSession userSession, HttpServletRequest request, HttpServletResponse response) {

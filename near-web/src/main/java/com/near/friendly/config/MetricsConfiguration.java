@@ -5,22 +5,25 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Slf4jReporter;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.codahale.metrics.jvm.*;
+import com.near.friendly.ApplicationProperties;
 import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
 import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
 import com.zaxxer.hikari.HikariDataSource;
-import org.slf4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import java.lang.management.ManagementFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
  *
  */
+@Slf4j
 @Configuration
 @EnableMetrics(proxyTargetClass = true)
 public class MetricsConfiguration extends MetricsConfigurerAdapter {
@@ -31,15 +34,15 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
     private static final String PROP_METRIC_REG_JVM_FILES = "jvm.files";
     private static final String PROP_METRIC_REG_JVM_BUFFERS = "jvm.buffers";
 
-    private final Logger log = LoggerFactory.getLogger(MetricsConfiguration.class);
+    private final MetricRegistry metricRegistry = new MetricRegistry();
 
-    private MetricRegistry metricRegistry = new MetricRegistry();
-
-    private HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
-
+    private final HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
 
     @Autowired(required = false)
     private HikariDataSource hikariDataSource;
+
+    @Inject
+    private ApplicationProperties applicationProperties;
 
     @Override
     @Bean
@@ -65,25 +68,20 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
             log.debug("Monitoring the datasource");
             hikariDataSource.setMetricRegistry(metricRegistry);
         }
-       // if (Jmx -> isEnabled()) {
+        if (applicationProperties.getMetrics().getJmx().isEnabled()) {
             log.debug("Initializing Metrics JMX reporting");
             JmxReporter jmxReporter = JmxReporter.forRegistry(metricRegistry).build();
             jmxReporter.start();
-      //  }
+        }
 
-       // if (Metrics -> logs -> isEnabled()) {
-            log.info("Initializing Metrics Log reporting");
-            final Slf4jReporter reporter = Slf4jReporter.forRegistry(metricRegistry)
+        if (applicationProperties.getMetrics().getLogs().isEnabled()) {
+          log.info("Initializing Metrics Log reporting");
+          final Slf4jReporter reporter = Slf4jReporter.forRegistry(metricRegistry)
                     .outputTo(LoggerFactory.getLogger("metrics"))
                     .convertRatesTo(TimeUnit.SECONDS)
                     .convertDurationsTo(TimeUnit.MILLISECONDS)
                     .build();
-            reporter.start(60, TimeUnit.SECONDS);
-        //}
+            reporter.start(applicationProperties.getMetrics().getLogs().getReportFrequency(), TimeUnit.SECONDS);
+        }
     }
-
-
-
-
-
 }

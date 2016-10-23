@@ -24,7 +24,7 @@ public class AccountResource {
      * @param request the HTTP request
      * @return the login if the user is authenticated
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/authenticate", method = RequestMethod.GET)
     @Timed
     public String isAuthenticated(HttpServletRequest request) {
         log.debug("REST request to check if the current user is authenticated");

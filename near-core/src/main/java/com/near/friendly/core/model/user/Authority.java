@@ -18,7 +18,7 @@ import java.io.Serializable;
  */
 @Data
 @Entity
-@Table(name = "jhi_authority")
+@Table(name = "nr_authority")
 @EqualsAndHashCode(of = "name")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Authority implements Serializable {
