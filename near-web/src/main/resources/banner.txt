@@ -1,0 +1,8 @@
+${AnsiColor.GREEN}    _   ___________    ____
+${AnsiColor.GREEN}   / | / / ____/   |  / __ \
+${AnsiColor.GREEN}  /  |/ / __/ / /| | / /_/ /
+${AnsiColor.GREEN} / /|  / /___/ ___ |/ _, _/
+${AnsiColor.GREEN}/_/ |_/_____/_/  |_/_/ |_|
+
+${AnsiColor.BRIGHT_BLUE}:: Near ${application.formatted-version}  :: Running Spring Boot ${spring-boot.version} ::
+:: http://near.github.io ::${AnsiColor.DEFAULT}

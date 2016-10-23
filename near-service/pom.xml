@@ -10,8 +10,15 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>near-commons</artifactId>
+    <artifactId>near-service</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.near.friendly</groupId>
+            <artifactId>near-core</artifactId>
+        </dependency>
+    </dependencies>
 
     
 </project>

@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>near-dao-api</artifactId>
+    <artifactId>near-core</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     
