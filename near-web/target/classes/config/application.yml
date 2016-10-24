@@ -1,0 +1,54 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overriden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+management:
+    context-path: /management
+
+spring:
+    application:
+        name: near
+    profiles:
+        active: dev
+    jackson:
+        serialization.write_dates_as_timestamps: false
+    jpa:
+        open-in-view: false
+        hibernate:
+            ddl-auto: none
+            naming:
+                strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+    mvc:
+        favicon:
+            enabled: false
+liquibase:
+    changeLog: classpath:/db/changelog/master.xml
+
+security:
+    basic:
+        enabled: false
+
+server:
+    port: 8080
+    session:
+      cookie:
+        name: SESSION
+
+
+near:
+   metrics:
+      jmx:
+        enabled: false
+      logs:
+        enabled: false
+        reportFrequency: 60
+
