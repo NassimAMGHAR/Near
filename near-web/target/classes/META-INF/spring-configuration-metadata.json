@@ -1,0 +1,45 @@
+{
+  "groups": [
+    {
+      "name": "near",
+      "type": "com.near.friendly.ApplicationProperties",
+      "sourceType": "com.near.friendly.ApplicationProperties"
+    },
+    {
+      "name": "near.metrics",
+      "type": "com.near.friendly.ApplicationProperties$Metrics",
+      "sourceType": "com.near.friendly.ApplicationProperties"
+    },
+    {
+      "name": "near.metrics.jmx",
+      "type": "com.near.friendly.ApplicationProperties$Metrics$Jmx",
+      "sourceType": "com.near.friendly.ApplicationProperties$Metrics"
+    },
+    {
+      "name": "near.metrics.logs",
+      "type": "com.near.friendly.ApplicationProperties$Metrics$Logs",
+      "sourceType": "com.near.friendly.ApplicationProperties$Metrics"
+    }
+  ],
+  "properties": [
+    {
+      "name": "near.metrics.jmx.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.near.friendly.ApplicationProperties$Metrics$Jmx",
+      "defaultValue": true
+    },
+    {
+      "name": "near.metrics.logs.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.near.friendly.ApplicationProperties$Metrics$Logs",
+      "defaultValue": false
+    },
+    {
+      "name": "near.metrics.logs.report-frequency",
+      "type": "java.lang.Long",
+      "sourceType": "com.near.friendly.ApplicationProperties$Metrics$Logs",
+      "defaultValue": 60
+    }
+  ],
+  "hints": []
+}
