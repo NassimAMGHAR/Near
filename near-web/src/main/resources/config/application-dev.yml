@@ -25,8 +25,8 @@ spring:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:postgresql://localhost:5432/near
         name:
-        username: postgres
-        password: postgres
+        username: near
+        password: user97thechild
     h2:
         console:
             enabled: false

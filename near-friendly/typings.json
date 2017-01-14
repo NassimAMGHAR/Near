@@ -1,8 +1,0 @@
-{
-  "name": "near-friendly",
-  "dependencies": {},
-  "globalDependencies": {
-    "jasmine": "registry:dt/jasmine#2.5.0+20161003201800",
-    "node": "registry:env/node#6.0.0+20161019193037"
-  }
-}
