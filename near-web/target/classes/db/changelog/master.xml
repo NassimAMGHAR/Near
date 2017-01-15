@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="1" author="ayassinov">
+        <createTable tableName="nr_user">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="login" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password_hash" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(50)"/>
+            <column name="last_name" type="varchar(50)"/>
+            <column name="email" type="varchar(100)"/>
+
+            <!-- audit columns -->
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="current_timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reset_date" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <createIndex tableName="nr_user" indexName="idx_user_login">
+            <column name="login" type="varchar(50)"/>
+        </createIndex>
+
+        <createTable tableName="nr_user_session">
+            <column name="id" type="varchar(76)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="value" type="varchar(76)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="session_date" type="date"/>
+            <column name="ip_address" type="varchar(39)"/>
+            <column name="user_agent" type="varchar(255)"/>
+            <column name="user_id" type="bigint"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="nr_user_session" baseColumnNames="user_id"
+                                 constraintName="fk_session_user"
+                                 referencedTableName="nr_user"
+                                 referencedColumnNames="id"/>
+
+        <createTable tableName="nr_authority">
+            <column name="name" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="nr_user_authority">
+            <column name="user_id" type="bigint"/>
+            <column name="authority_name" type="varchar(50)"/>
+        </createTable>
+
+        <addPrimaryKey tableName="nr_user_authority" columnNames="user_id, authority_name"/>
+
+        <addForeignKeyConstraint baseTableName="nr_user_authority" baseColumnNames="user_id"
+                                 constraintName="fk_user_authority"
+                                 referencedTableName="nr_user"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="nr_user_authority" baseColumnNames="authority_name"
+                                 constraintName="fk_authority_name"
+                                 referencedTableName="nr_authority"
+                                 referencedColumnNames="name"/>
+
+        <!-- Insert data -->
+        <insert tableName="nr_user">
+            <column name="login" value="user"/>
+            <!-- hashed password : original value is: user -->
+            <column name="password_hash" value="$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K"/>
+            <column name="first_name" value="user"/>
+            <column name="last_name" value=""/>
+            <column name="email" value="user@email.com"/>
+            <column name="created_by" value="system"/>
+        </insert>
+
+        <insert tableName="nr_authority">
+            <column name="name" value="USER"/>
+        </insert>
+        <insert tableName="nr_user_authority">
+            <column name="user_id" value="1"/>
+            <column name="authority_name" value="USER"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2" author="namghar">
+        <createTable tableName="nr_channel">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="channelId" type="bigint" autoIncrement="true">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

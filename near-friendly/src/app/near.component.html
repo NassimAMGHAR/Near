@@ -1,6 +1,8 @@
-<h1>
-  {{title}}
-</h1>
-<div>
-  <near-channel></near-channel>
-</div>
+<!-- navigation bar -->
+<near-nav></near-nav>
+<md-sidenav-container>
+  <near-side-nav></near-side-nav>
+  <div class="my-content">
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>

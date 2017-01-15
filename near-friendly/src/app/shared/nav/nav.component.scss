@@ -1,0 +1,14 @@
+
+.near-navbar{
+    .nav-button{
+        margin-left: 15px;   
+        a {
+            color: inherit; 
+            text-decoration: inherit; /* no underline */
+              
+        }
+        :hover{
+            color: #fff;
+        }
+    }
+}
