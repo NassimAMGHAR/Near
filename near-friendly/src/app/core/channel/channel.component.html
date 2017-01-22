@@ -1,0 +1,18 @@
+<div class="channel-style">
+  <md-toolbar class="list-menu">
+    <div class="title">{{name}} </div>
+    <span class="fill-remaining-space"></span>
+    <span class="action" (click)="refreshChannels()"><md-icon >refresh</md-icon></span>
+    <span class="action" (click)="stopResfesh()"><md-icon >queue</md-icon></span>
+  </md-toolbar>
+  <ul>
+    <li *ngFor="let channel of channels">
+      <md-card>
+        <md-card-title>{{channel.name}}</md-card-title>
+        <md-card-content>
+          <p>{{channel.description}}</p>
+        </md-card-content>
+      </md-card>
+    </li>
+  </ul>
+</div>

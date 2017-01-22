@@ -1,0 +1,39 @@
+$blue: #2196F3;
+
+.channel-style{
+    width: 85%;
+    margin-right: auto;
+    margin-left: auto;
+    .list-menu{
+        color: #fff;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: $blue;
+        margin-top: 5px; 
+        .title{
+            font-weight: 800;          
+            font-size: 24px;
+            padding-left: 10px;      
+        }
+        .fill-remaining-space {
+        // This fills the remaining space, by using flexbox. 
+        // Every toolbar row uses a flexbox row layout.
+        flex: 1 1 auto;
+        }
+        .action {
+            margin-left:5px;
+            :hover{
+                background-color: #ddd;
+                cursor: pointer;
+                cursor: hand;
+            }
+        }
+    }
+    ul {
+        list-style-type: none;  
+        padding: 0px;
+        md-card {
+            margin-bottom: 2px;
+        }
+    }
+}

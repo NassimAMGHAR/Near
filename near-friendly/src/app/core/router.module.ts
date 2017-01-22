@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { NearComponent } from './near.component';
 import { ChannelComponent } from './channel/channel.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
-import { NearContainerComponent } from './shared/container/container.component';
-import { SideNavComponent } from './shared/side-nav/side-nav.component';
+import { NearContainerComponent } from './container/container.component';
 
 const nearRoutes: Routes = [
     {
@@ -21,15 +19,13 @@ const nearRoutes: Routes = [
         children: [
             {
                 path: 'channel',
-                component: ChannelComponent,
-                data: { title: 'Channel List' }
+                component: ChannelComponent
             }, {
                 path: 'user',
-                component: UserComponent,
-                data: { title: 'User List' }
+                component: UserComponent
             }
         ]
-    },
+    }, 
     { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,0 +1,13 @@
+.spinner {
+  margin-left: auto;
+  margin-right: auto;
+  width:100px;
+  height: 50px;
+  visibility: hidden; 
+  md-progress-spinner {
+    height: 50px;
+  }
+}
+.is-active {
+  visibility: visible;
+}

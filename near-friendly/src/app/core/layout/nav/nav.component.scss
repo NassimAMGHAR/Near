@@ -1,5 +1,7 @@
 
 .near-navbar{
+    //position:fixed;
+    //top:0;
     .nav-button{
         margin-left: 15px;   
         a {
@@ -9,6 +11,8 @@
         }
         :hover{
             color: #fff;
+            cursor: pointer;
+            cursor: hand;
         }
     }
 }
